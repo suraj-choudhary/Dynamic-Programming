@@ -139,13 +139,45 @@ int powerOfNumber(int R, int N) {
     return  R * powerOfNumber(R, N - 1);
 }
 
+
+/// This is the method is used for getting the power of number
+/// - Parameters:
+///   - R: base
+///   - N: power
+int powerOfNumberFast(int R, int N) {
+    if(N == 0) {
+        return 1;
+    }
+    int subProb = powerOfNumber(R, N / 2);
+    int subProbSq = subProb * subProb;
+    
+    if(N & 1) {
+        return R * subProb;
+    }
+    return subProbSq;
+}
+
+
+
+//MARK: Tiling Problem:
+
+int HowManyWayToFillingTheTile(int n) {
+    
+    if(n <= 3) {
+        return 1;
+    }
+    return HowManyWayToFillingTheTile(n - 1) + HowManyWayToFillingTheTile(n - 4);
+    
+}
+
 /*
  int main() {
-     int a = powerOfNumber(2, 10);
+     int a = HowManyWayToFillingTheTile(4);
      printf("%d ", a);
  }
 
  */
+ 
 
 
 
@@ -209,9 +241,74 @@ void tailRecursion(int n) {
 
 /// To find the binary string of no consecutive ones
 /// - Parameter N: nummber
-void BinaryString(int N) {
+void countStrings(int n, string out, int last_digit) {
     
+    if (n == 0)
+    {
+        cout << out << endl;
+        return;
+    }
+    
+    countStrings(n - 1, out + "0", 0);
+//    if (last_digit == 0) {
+        countStrings(n - 1, out + "1", 1);
+//    }
 }
 
 
+/*
+ int main() {
+     countStrings(2, "", 0);
+ }
 
+ */
+
+void findSubset(char *input, char *output, int i, int j) {
+    if(input[i] == '\0') {
+        output[j] = '\0';
+        cout<<output<<endl;
+        return;
+    }
+    
+    output[j] = input[i];
+    findSubset(input, output, i + 1, j + 1);
+    findSubset(input, output, i + 1, j);
+}
+/*
+ int main() {
+     char input[100];
+     char output[100];
+     cin>>input;
+     findSubset(input, output, 0, 0);
+     
+ }
+
+ */
+
+
+void perm(char S[], int k) {
+    static int A[10] = {0};
+    static char res[10];
+    int i;
+    
+    if(S[k] == '\0') {
+        res[k] = '\0';
+        printf("%s ", res);
+    } else {
+        for(i = 0; S[i] != '\0'; i++) {
+           
+            if(A[i] == 0) {
+                res[k] = S[i];
+                A[i] = 1;
+                perm(S, k + 1);
+                A[i] = 0;
+            }
+        }
+    }
+}
+
+int main() {
+    char str[] = "ABC";
+    int k = 0;
+    perm(str, k);
+}
