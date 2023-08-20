@@ -10,7 +10,7 @@
 
 using namespace::std;
 
-// MARK: Recursion problem:---------I believe one day----------------
+// MARK: Recursion problem:-------------------------
 
 /// This is related to fibonacci of numebr
 /// - Parameter n: number
@@ -269,7 +269,6 @@ void findSubset(char *input, char *output, int i, int j) {
         cout<<output<<endl;
         return;
     }
-    
     output[j] = input[i];
     findSubset(input, output, i + 1, j + 1);
     findSubset(input, output, i + 1, j);
@@ -296,7 +295,6 @@ void perm(char S[], int k) {
         printf("%s ", res);
     } else {
         for(i = 0; S[i] != '\0'; i++) {
-           
             if(A[i] == 0) {
                 res[k] = S[i];
                 A[i] = 1;
@@ -307,8 +305,186 @@ void perm(char S[], int k) {
     }
 }
 
-int main() {
-    char str[] = "ABC";
-    int k = 0;
-    perm(str, k);
+/*
+ int main() {
+     char str[] = "ABC";
+     int k = 0;
+     perm(str, k);
+ }
+
+ */
+
+void swaping(int *x, int *y) {
+    int temp = *x;
+    *x = *y;
+    *y = temp;
 }
+
+//MARK: Kadane's Algorithm(Brute force)
+
+void kadaneAlgorithm(int arr[], int size) {
+    int sum = 0;
+    
+    int beforSum = INT_MIN;
+    
+    for(int i = 0; i < size; i++) {
+        sum += arr[i];
+        
+        if(sum > beforSum) {
+            beforSum = sum;
+        }
+    }
+    printf("%d ", beforSum);
+}
+
+/*
+ int main() {
+     int arr[] = {-1,-2,-3,-4};
+     int size = sizeof(arr) / sizeof(arr[0]);
+     kadaneAlgorithm(arr, size);
+ }
+
+ */
+
+
+
+//MARK: Subarray with given sum:(Array Question)
+
+void subarraySum(int arr[], int n, int target) {
+    
+    int sum = arr[0];
+    int start = 0;
+    bool found = false;
+    
+    for(int i = 1; i < n; i++) {
+        
+        while (sum > target && start < n - 1) {
+            sum = sum - arr[start];
+            start++;
+            found = true;
+        }
+        if(sum == target) {
+            printf("%d %d", start, i);
+            break;
+        }
+        sum += arr[i];
+    }
+    if(found == false) {
+        printf("not found");
+    }
+    
+}
+
+
+//MARK: N Queen problem
+
+void printBoard(int n, int baord[][20]) {
+    
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < n; j++) {
+            printf("%d", baord[i][j]);
+        }
+    }
+}
+
+
+
+
+
+// MARK: GEEKS FOR GEEKS BASICS QUESTION
+// MARK: Binary Search
+
+int BinarySearch(int arr[], int size, int key) {
+    int left = 0;
+    int right = size - 1;
+    while (left <= right) {
+        int mid = left + (right - left) / 2;
+        if(mid == key) {
+            return mid;
+        } else if(arr[mid] > key) {
+            right = mid - 1;
+        } else {
+            left = mid + 1;
+        }
+    }
+    return -1;
+}
+/*
+ int main() {
+     int arr[] = {1, 2, 3, 4, 5};
+     int size = sizeof(arr) / sizeof(arr[0]);
+     int key = 2;
+     BinarySearch(arr, size, key);
+ }
+
+ */
+
+// MARK: Recursive Binary Search
+
+int RBinarySearch(int arr[], int left, int right, int key) {
+    
+    if(right >= left) {
+        int mid = left + (right - left) / 2;
+        if(arr[mid] == key) {
+            return mid;
+        } else if(arr[mid] < key) {
+            RBinarySearch(arr, mid + 1, right, key);
+        } else {
+            RBinarySearch(arr, left, mid - 1, key);
+        }
+    }
+    return -1;
+}
+
+// MARK: Union of two arrays-
+
+
+/// Union of two arrays-(this method is not hanlding the duplicate element)
+/// - Parameters:
+///   - arr1: arr1
+///   - arr2: arr2
+///   - m: size of arr1
+///   - n: size of arr2
+void doUnion(int arr1[], int arr2[], int m, int n) {
+    int i = 0;
+    int j = 0;
+    
+    while (i < m && j < n) {
+        
+        if(arr1[i] < arr2[j]) {
+            printf("%d ", arr1[i]);
+            i++;
+        } else if(arr1[i] > arr2[j]) {
+            printf("%d ", arr2[j]);
+            j++;
+        } else {
+            printf("%d ", arr2[j]);
+            i++;
+            j++;
+        }
+    }
+    
+    while (i < m) {
+        printf("%d", arr1[i++]);
+    }
+    while (j < n) {
+        printf("%d", arr2[j++]);
+    }
+}
+
+// MARK: Union of two arrays-
+
+
+void UnionArray(int arr1[], int arr2[], int m, int n) {
+    
+    
+}
+
+int main() {
+    int arr1[] = {3, 5};
+    int arr2[] = {1, 2, 3, 4, 5};
+    int m = sizeof(arr1) / sizeof(arr1[0]);
+    int n = sizeof(arr2) / sizeof(arr2[0]);
+    UnionArray(arr1, arr2, m, n);
+}
+
