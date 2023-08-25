@@ -376,17 +376,6 @@ void subarraySum(int arr[], int n, int target) {
 }
 
 
-//MARK: N Queen problem
-
-void printBoard(int n, int baord[][20]) {
-    
-    for(int i = 0; i < n; i++) {
-        for(int j = 0; j < n; j++) {
-            printf("%d", baord[i][j]);
-        }
-    }
-}
-
 
 
 
@@ -472,19 +461,50 @@ void doUnion(int arr1[], int arr2[], int m, int n) {
     }
 }
 
-// MARK: Union of two arrays-
+/*
+ int main() {
+     int arr1[] = {3, 5};
+     int arr2[] = {1, 2, 3, 4, 5};
+     int m = sizeof(arr1) / sizeof(arr1[0]);
+     int n = sizeof(arr2) / sizeof(arr2[0]);
+     UnionArray(arr1, arr2, m, n);
+ }
 
 
-void UnionArray(int arr1[], int arr2[], int m, int n) {
+ */
+
+
+
+//MARK: N-Queen problem:
+
+void printBaord(int n, int baord[][20]) {
     
-    
+    for(int i = 0; i < n; i++) {
+        for(int j = 0; j < n; j++) {
+            cout<<baord[i][j]<< " ";
+        }
+        cout<<endl;
+    }
 }
+
+bool solveQueen(int n, int board[][20], int i) {
+    
+    //base case
+    if(i == n) {
+        printBaord(n, board);
+        return false;
+    }
+    
+    
+    //recursive case
+    //try to place queen in every row
+    return false;
+}
+
 
 int main() {
-    int arr1[] = {3, 5};
-    int arr2[] = {1, 2, 3, 4, 5};
-    int m = sizeof(arr1) / sizeof(arr1[0]);
-    int n = sizeof(arr2) / sizeof(arr2[0]);
-    UnionArray(arr1, arr2, m, n);
+    int board[20][20] = {0};
+    int n;
+    cin>>n;
+    
 }
-
